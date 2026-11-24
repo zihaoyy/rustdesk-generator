@@ -153,7 +153,7 @@ jobs:
             mv "$f" "$dir/databk.txt"
           done
           grep -rl "custom\.txt" --include="*.rs" --include="*.dart" --include="*.py" --include="*.h" --include="*.cpp" . | while read -r f; do
-            sed -i 's/custom\.txt/databk.txt/g' "$f"
+            python3 -c 'from pathlib import Path; p=Path("'"$f"'"); p.write_text(p.read_text().replace("custom.txt","databk.txt"))'
           done
 
       - name: Install flutter
